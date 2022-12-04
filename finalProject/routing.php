@@ -3,8 +3,17 @@
 use core\App;
 use core\Utils;
 
-App::getRouter()->setDefaultRoute('hello'); #default action
-//App::getRouter()->setLoginRoute('login'); #action to forward if no permissions
+App::getRouter()->setDefaultRoute('homeShow');
+App::getRouter()->setLoginRoute('loginShow');
 
-Utils::addRoute('hello', 'HelloCtrl');
-//Utils::addRoute('action_name', 'controller_class_name');
+Utils::addRoute('homeShow', 'HomeCtrl');
+
+Utils::addRoute('loginShow', 'LoginCtrl');
+Utils::addRoute('login', 'LoginCtrl');
+Utils::addRoute('logout', 'LoginCtrl', ['user', 'admin']);
+
+Utils::addRoute('registrationShow', 'RegistrationCtrl');
+Utils::addRoute('registration', 'RegistrationCtrl');
+
+Utils::addRoute('accountShow', 'AccountCtrl', ['user']);
+Utils::addRoute('accountUpdate', 'AccountCtrl', ['user']);

@@ -78,4 +78,66 @@ class Utils {
         return App::getConf()->action_root . self::_url_maker_noclean($action, $params);
     }
 
+//user defined
+    public static function isLoginValid($login)
+    {
+        $loginValidator = new Validator();
+	    $login = $loginValidator->validate($login, [
+  	    	'trim' => true,
+  	    	'required' => true,
+  	    	'required_message' => 'Login is required.',
+  	    	'min_length' => 3,
+  	    	'max_length' => 15,
+  	    	'validator_message' => 'Login should have 3 - 15 characters.'
+	    ]);
+
+        return $loginValidator->isLastOK();
+    }
+
+    public static function isPasswordValid($password)
+    {
+        $passValidator = new Validator();
+        $pass = $passValidator->validate($password, [
+            'required' => true,
+            'required_message' => 'Password is required.',
+            'min_length' => 5,
+            'max_length' => 15,
+            'validator_message' => 'Password should have 5 - 15 characters.'
+        ]);
+
+        return $passValidator->isLastOK();
+    }
+
+    public static function isEmailValid($email)
+    {
+        $emailValidator = new Validator();
+        $email = $emailValidator->validate($email, [
+            'required' => true,
+            'email' => true,
+            'required_message' => 'Email is required.',
+            'validator_message' => 'Email does not look legit.'
+        ]);
+
+        return $emailValidator->isLastOK();
+    }
+
+    public static function isContactNumberValid($contactNumber)
+    {
+        $contactNumberValidator = new Validator();
+        $contactNumber = $contactNumberValidator->validate($contactNumber, [
+            'max_length' => 12,
+            'validator_message' => 'Contact number too long.'
+        ]);
+
+        return $contactNumberValidator->isLastOK();
+    }
+
+    public static function getIdRole($name)
+    {
+	    $idRole = App::getDB()->select("role", "idRole", [
+	    	"name" => $name
+	    ]);
+
+	    return "$idRole[0]";
+    }
 }

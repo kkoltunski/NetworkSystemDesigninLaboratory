@@ -5,13 +5,14 @@ $conf->debug = true; # set true during development and use in your code (for ins
 $conf->server_name = 'localhost';   # server address and port
 $conf->protocol = 'http';           # http or https
 $conf->app_root = '/NetworkApplicationsLaboratory/finalProject/public';   # project subfolder in domain (relative to main domain)
+$conf->projectDir = '/NetworkApplicationsLaboratory/finalProject/';
 
 # ---- Database config - values required by Medoo
 $conf->db_type = 'mysql';
 $conf->db_server = 'localhost';
-$conf->db_name = '_database_name';
-$conf->db_user = '_user';
-$conf->db_pass = '_password';
+$conf->db_name = 'vinylrental';
+$conf->db_user = 'root';
+$conf->db_pass = '';
 $conf->db_charset = 'utf8';
 
 # ---- Database config - optional values
