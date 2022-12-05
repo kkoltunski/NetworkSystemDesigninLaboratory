@@ -6,7 +6,7 @@
 
         {if \core\RoleUtils::inRole('user') or \core\RoleUtils::inRole('admin')}
             {if \core\RoleUtils::inRole('admin')}
-                <li class="active"><a href="{$conf->action_url}resultsList">Manage users</a></li>
+                <li class="active"><a href="{$conf->action_url}manageAccountsShow">Manage users</a></li>
                 <li class="active"><a href="{$conf->action_url}resultsList">Manage products</a></li>
             {else}
                 <li class="active"><a href="{$conf->action_url}resultsList">Reservations</a></li>

@@ -47,7 +47,8 @@ class RegistrationCtrl
 	private function getParams()
 	{
 		$this->form->login = ParamUtils::getFromRequest('login');
-		$this->form->pass = ParamUtils::getFromRequest('pass');
+		$this->form->passwordFirst = ParamUtils::getFromRequest('pass1');
+		$this->form->passwordSecond = ParamUtils::getFromRequest('pass2');
 		$this->form->email = ParamUtils::getFromRequest('email');
 		$this->form->contactNumber = ParamUtils::getFromRequest('number');
 	}
@@ -68,25 +69,35 @@ class RegistrationCtrl
 	private function validate() 
     {
         $loginValid = Utils::isLoginValid($this->form->login);
-		$passValid = Utils::isPasswordValid($this->form->pass);
         $emailValid = Utils::isEmailValid($this->form->email);
-        $contactNumberValid = Utils::isContactNumberValid($this->form->contactNumber);
-		
-        $isUniqe = $this->isUniqeInDB();
 
+        $isUniqe = $this->isUniqeInDB();
         if(!$isUniqe)
         {
 			Utils::addErrorMessage('Username or email exist in data base.');
         }
 
-		return ($loginValid && $passValid && $emailValid && $contactNumberValid && $isUniqe);
+        $passwordsTheSame = (strcmp($this->form->passwordFirst, $this->form->passwordSecond) === 0);
+        $passFirstValid = null;
+        if($passwordsTheSame)
+        {
+            $passFirstValid = Utils::isPasswordValid($this->form->passwordFirst);
+        }
+        else
+        {
+            Utils::addErrorMessage('Passwords are not the same.');
+        }
+
+        $contactNumberValid = Utils::isContactNumberValid($this->form->contactNumber);
+		
+		return ($loginValid && $passFirstValid && $passwordsTheSame && $emailValid && $contactNumberValid && $isUniqe);
 	}
 
     private function insertToDB()
     {
         App::getDB()->insert("user", [
             "username" => $this->form->login,
-            "password" => $this->form->pass,
+            "password" => $this->form->passwordFirst,
             "email" => $this->form->email,
             "contactNumber" => $this->form->contactNumber
         ]);

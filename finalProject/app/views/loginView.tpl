@@ -18,9 +18,7 @@
 		<hr>
 
 		<div class="row">
-			<div class="text-danger">
-				<b>If you forgot password contact with us.</b>
-			</div>
+			<p style="color: rgb(255,0,0)">If you forgot your credentials, contact with us.</p>
 			<div class="col-lg-4 text-right">
 				<button class="btn btn-action" type="submit">Login</button>
 			</div>

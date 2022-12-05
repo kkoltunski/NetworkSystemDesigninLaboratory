@@ -9,7 +9,11 @@
 	<form action="{$conf->action_url}accountUpdate" method="post">
 		<div class="top-margin">
 			<label>New password</label>
-			<input type="password" class="form-control" name="pass">
+			<input type="password" class="form-control" name="pass1">
+		</div>
+		<div class="top-margin">
+			<label>Repeat new password</label>
+			<input type="password" class="form-control" name="pass2">
 		</div>
 		<div class="top-margin">
 			<label>New email</label>

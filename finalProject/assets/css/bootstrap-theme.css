@@ -187,8 +187,8 @@
 .btn-action,
 .btn-primary {
 	color: #FFEFD7;
-	background-image: -webkit-linear-gradient(top, #FF9B22 0%, #FF8C00 100%);
-	background-image: linear-gradient(to bottom, #FF9B22 0%, #FF8C00 100%);
+	background-image: -webkit-linear-gradient(top, rgb(185, 130, 67), rgb(187, 140, 87) 100%);
+	background-image: linear-gradient(to bottom, rgb(185, 130, 67) 0%, rgb(187, 140, 87) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffFF9B22', endColorstr='#ffFF8C00', GradientType=0);
 	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 	background-repeat: repeat-x;
@@ -198,11 +198,11 @@
 .btn-action:hover,
 .btn-action:focus {
 	color: #fff;
-	background: #FF9B22;
+	background: rgb(187, 158, 125);
 }
 
 .btn-action:active {
-	background: #FF8C00;
+	background: rgb(187, 140, 87);
 }
 
 

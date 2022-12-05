@@ -282,3 +282,59 @@ img.pull-left {
 	background-color: #ff0;
 	color: #222;
 }
+
+.myContainer {
+	max-width: 1000px;
+	margin-right: auto;
+	margin-left: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: 24px;
+	padding-bottom: 24px;
+}
+
+.myTable {
+	width: 100%;
+	/* border: 1px solid rgb(87, 55, 19); */
+	border: 2px solid rgb(28, 114, 184);
+}
+
+.myTable-header {
+	display: flex;
+	width: 100%;
+	/* background: rgb(87, 55, 19); */
+	background: rgb(28, 114, 184);
+	padding: 24px;
+	align-items: center;
+}
+
+.myTable-row {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	padding: 24px;
+}
+
+/* .myTable-row:nth-of-type(odd) {
+	background: rgb(187, 158, 125);
+}
+
+.myTable-row:nth-of-type(even) {
+	background: rgb(136, 98, 55);
+} */
+
+.myTable-row:nth-of-type(odd) {
+	background: rgb(26, 161, 202);
+}
+
+.myTable-row:nth-of-type(even) {
+	background: rgb(28, 114, 184);
+}
+
+.myTable-data,
+.header__item {
+	flex: 1 1 20%;
+	align-items: center;
+	text-align: center;
+}

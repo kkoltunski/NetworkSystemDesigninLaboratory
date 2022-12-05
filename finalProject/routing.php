@@ -17,3 +17,12 @@ Utils::addRoute('registration', 'RegistrationCtrl');
 
 Utils::addRoute('accountShow', 'AccountCtrl', ['user']);
 Utils::addRoute('accountUpdate', 'AccountCtrl', ['user']);
+
+Utils::addRoute('manageAccountsShow', 'AccountManagmentCtrl', ['admin']);
+Utils::addRoute('addUserShow', 'AccountManagmentCtrl', ['admin']);
+Utils::addRoute('addUser', 'AccountManagmentCtrl', ['admin']);
+Utils::addRoute('resetPassword', 'AccountManagmentCtrl', ['admin']);
+Utils::addRoute('verify', 'AccountManagmentCtrl', ['admin']);
+Utils::addRoute('delete', 'AccountManagmentCtrl', ['admin']);
+
+

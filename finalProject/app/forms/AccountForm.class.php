@@ -4,7 +4,8 @@ namespace app\forms;
 
 class AccountForm {
 	public $login;
-	public $password;
+	public $passwordFirst;
+	public $passwordSecond;
 	public $email;
 	public $contactNumber;
 } 

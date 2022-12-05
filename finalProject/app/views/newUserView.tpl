@@ -3,11 +3,10 @@
 {block name=content}
 
 <div class="panel-body">
-	<h3 class="thin text-center">Register</h3>
-	<p class="text-center text-muted">Register to enjoy functionalities of our platform.</p>
+	<h3 class="thin text-center">Add new user</h3>
 	<hr>
 
-	<form action="{$conf->action_url}registration" method="post">
+	<form action="{$conf->action_url}addUser" method="post">
 		<div class="top-margin">
 			<label>Login\Username <span class="text-danger">*</span></label>
 			<input type="text" class="form-control" name="login">
@@ -31,9 +30,8 @@
 		<hr>
 
 		<div class="row">
-			<p style="color: rgb(255,0,0)">If you forgot your credentials, contact with us.</p>
 			<div class="col-lg-4 text-right">
-				<button class="btn btn-action" type="submit">Register</button>
+				<button class="btn btn-action" type="submit">Add</button>
 			</div>
 		</div>
 	</form>

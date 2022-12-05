@@ -27,8 +27,10 @@ class AccountCtrl
 
 		if ($this->validate()) 
         {	
-            $this->updateDB();
-			Utils::addInfoMessage('Account succesfully updated.');
+            if($this->updateDB())
+            {
+                Utils::addInfoMessage('Account succesfully updated.');
+            }
 		}
         $this->generateView();
     }
@@ -44,7 +46,8 @@ class AccountCtrl
 	{
         $user = unserialize($_SESSION['user']);
         $this->form->login = $user->username;
-		$this->form->pass = ParamUtils::getFromRequest('pass');
+		$this->form->passwordFirst = ParamUtils::getFromRequest('pass1');
+		$this->form->passwordSecond = ParamUtils::getFromRequest('pass2');
 		$this->form->email = ParamUtils::getFromRequest('email');
 		$this->form->contactNumber = ParamUtils::getFromRequest('number');
 	}
@@ -60,9 +63,19 @@ class AccountCtrl
 
     private function isPasswordValid()
     {
-        if(!empty($this->form->pass))
+        if(!empty($this->form->passwordFirst))
         {
-            return Utils::isPasswordValid($this->form->pass);
+            $passwordsTheSame = (strcmp($this->form->passwordFirst, $this->form->passwordSecond) === 0);
+            if($passwordsTheSame)
+            {
+                return Utils::isPasswordValid($this->form->passwordFirst);
+            }
+            else
+            {
+                Utils::addErrorMessage('Passwords are not the same.');
+                return false;
+            }
+            
         }
         else
         {
@@ -120,11 +133,14 @@ class AccountCtrl
 
     private function updateDB()
     {
-        if(!empty($this->form->pass))
+        $updated = false;
+        if(!empty($this->form->passwordFirst))
         {
             App::getDB()->update("user", [
-                "password" => $this->form->pass,
+                "password" => $this->form->passwordFirst,
             ], ["username" => $this->form->login]);
+
+            $updated = true;
         }
 
         if(!empty($this->form->email))
@@ -132,6 +148,8 @@ class AccountCtrl
             App::getDB()->update("user", [
                 "email" => $this->form->email,
             ], ["username" => $this->form->login]);
+
+            $updated = true;
         }
 
         if(!empty($this->form->contactNumber))
@@ -139,6 +157,10 @@ class AccountCtrl
             App::getDB()->update("user", [
                 "contactNumber" => $this->form->contactNumber,
             ], ["username" => $this->form->login]);
+
+            $updated = true;
         }
+
+        return $updated;
 	}
 }
