@@ -16,6 +16,7 @@ TODO
 -Added another password field in registration and account managment.
 -admin accounts management done.
 -visual improvements.
+-added searchBar which will be used for "Manage products" nad "Serach..." page
 
 TODO
 -Idk why i have to press two times button logout.
@@ -23,3 +24,4 @@ TODO
 -Main page with initial vinyl category selecting
 -search mechanism
 -something more that i do not know now.
+-search bar could have border

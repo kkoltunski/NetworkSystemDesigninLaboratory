@@ -296,14 +296,12 @@ img.pull-left {
 
 .myTable {
 	width: 100%;
-	/* border: 1px solid rgb(87, 55, 19); */
 	border: 2px solid rgb(28, 114, 184);
 }
 
 .myTable-header {
 	display: flex;
 	width: 100%;
-	/* background: rgb(87, 55, 19); */
 	background: rgb(28, 114, 184);
 	padding: 24px;
 	align-items: center;
@@ -315,14 +313,6 @@ img.pull-left {
 	align-items: center;
 	padding: 24px;
 }
-
-/* .myTable-row:nth-of-type(odd) {
-	background: rgb(187, 158, 125);
-}
-
-.myTable-row:nth-of-type(even) {
-	background: rgb(136, 98, 55);
-} */
 
 .myTable-row:nth-of-type(odd) {
 	background: rgb(26, 161, 202);
@@ -337,4 +327,68 @@ img.pull-left {
 	flex: 1 1 20%;
 	align-items: center;
 	text-align: center;
+}
+
+.custom-select {
+	position: relative;
+	font-family: "Open sans";
+	float: left;
+	margin-left: 60px;
+}
+
+.custom-select select {
+	display: none;
+	/* hide original SELECT element: */
+}
+
+.select-selected {
+	background-color: rgb(187, 158, 125);
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+	position: absolute;
+	content: "";
+	top: 14px;
+	right: 10px;
+	width: 0;
+	height: 0;
+	border: 6px solid transparent;
+	border-color: rgb(87, 55, 19) transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+	border-color: transparent transparent rgb(87, 55, 19) transparent;
+	top: 7px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,
+.select-selected {
+	color: rgb(87, 55, 19);
+	padding: 8px 16px;
+	border: 1px solid transparent;
+	border-color: rgb(87, 55, 19);
+	cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+	position: absolute;
+	background-color: rgb(187, 158, 125);
+	top: 100%;
+	left: 0;
+	right: 0;
+	z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+	display: none;
+}
+
+.select-items div:hover,
+.same-as-selected {
+	background-color: rgba(0, 0, 0, 0.1);
 }
