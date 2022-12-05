@@ -3,7 +3,7 @@
 {block name=content}
 
 <div class="panel-body">
-	<h3 class="thin text-center">Account details</h3>
+	<h3 class="thin text-center">Account settings</h3>
 	<hr>
 
 	<form action="{$conf->action_url}accountUpdate" method="post">

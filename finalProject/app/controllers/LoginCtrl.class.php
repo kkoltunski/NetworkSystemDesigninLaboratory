@@ -46,7 +46,6 @@ class LoginCtrl{
 	private function generateView()
 	{
 		App::getSmarty()->assign('page_title','Login page');
-		App::getSmarty()->assign('page_description','Log in to have access to credit calculator.');
 		App::getSmarty()->assign('form',$this->form);
 		App::getSmarty()->display('loginView.tpl');
 	}

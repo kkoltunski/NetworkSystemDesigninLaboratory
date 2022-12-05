@@ -10,7 +10,7 @@
                 <li class="active"><a href="{$conf->action_url}resultsList">Manage products</a></li>
             {else}
                 <li class="active"><a href="{$conf->action_url}resultsList">Reservations</a></li>
-                <li class="active"><a href="{$conf->action_url}accountShow">Account</a></li>
+                <li class="active"><a href="{$conf->action_url}accountShow">Account settings</a></li>
 		    {/if}		
 
             <li><a class="btn" href="{$conf->action_url}logout">LOG OUT</a></li>

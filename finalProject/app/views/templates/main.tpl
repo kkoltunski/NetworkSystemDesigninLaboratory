@@ -4,7 +4,6 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="{$page_description|default:" Opis domyślny"}">
 	<meta name="author" content="Klaudiusz Kołtuński">
 
 	<link rel="shortcut icon" href="{$conf->projectDir}/assets/images/gt_favicon.png">
@@ -37,7 +36,6 @@
 	<!-- Header -->
 	<header id="head">
 		<h1 class="lead">{$page_title|default:"Tytuł domyślny"}</h1>
-		<p class="tagline">{$page_description|default:"Opis domyślny"}</p>
 	</header>
 	<!-- /Header -->
 
@@ -48,35 +46,7 @@
 		</div>
 	</div>
 
-	<div class="footer2 top-space">
-		<div class="container">
-			<div class="row">
-
-				<div class="col-md-6 widget">
-					<div class="widget-body">
-						<p class="simplenav">
-							<a href="#">Top page</a> | 
-							<b><a href="{$conf->action_url}calcShow">Home</a></b> | 
-							<b><a href="{$conf->action_url}resultsList">Search...</a></b> | 
-							<b><a href="{$conf->action_url}registrationShow">Register</a></b> | 
-							<b><a href="{$conf->action_url}loginShow">LOG IN</a></b> |
-							<b><a href="{$conf->action_url}logout">LOG OUT</a></b>
-						</p>
-					</div>
-				</div>
-
-				<div class="col-md-6 widget">
-					<div class="widget-body">
-						<p class="text-right">
-							Copyright &copy; 2022, Klaudiusz Kołtuński. Designed by <a href="http://gettemplate.com/"
-								rel="designer">gettemplate</a>
-						</p>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
+	{include file='footer.tpl'}
 
 	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

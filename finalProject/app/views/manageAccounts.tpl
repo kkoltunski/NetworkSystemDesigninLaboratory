@@ -2,6 +2,9 @@
 
 {block name=content}
 
+<h3 class="thin text-center">Accounts management</h3>
+<hr>
+
 <div class="myContainer">
 
     <div class="myTable">
@@ -45,5 +48,7 @@
         </div>
     </div>
 </div>
+
+<hr>
 
 {/block}

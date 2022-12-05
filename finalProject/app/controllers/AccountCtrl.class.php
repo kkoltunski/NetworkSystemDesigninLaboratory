@@ -36,7 +36,7 @@ class AccountCtrl
     }
 
 	private function generateView(){
-		App::getSmarty()->assign('page_title','Registration');
+		App::getSmarty()->assign('page_title','Account settings');
 		App::getSmarty()->assign('form',$this->form);
 
 		App::getSmarty()->display('accountView.tpl');

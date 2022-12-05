@@ -15,3 +15,11 @@ TODO
 -small css improvements.
 -Added another password field in registration and account managment.
 -admin accounts management done.
+-visual improvements.
+
+TODO
+-Idk why i have to press two times button logout.
+-products management by admin pov
+-Main page with initial vinyl category selecting
+-search mechanism
+-something more that i do not know now.
