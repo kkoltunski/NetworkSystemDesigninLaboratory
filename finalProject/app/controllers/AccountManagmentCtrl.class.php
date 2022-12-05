@@ -160,12 +160,15 @@ class AccountManagmentCtrl
 
     private function insertToDB()
     {
+        $user = unserialize($_SESSION['user']);
+        
         App::getDB()->insert("user", [
             "username" => $this->form->login,
             "password" => $this->form->passwordFirst,
             "email" => $this->form->email,
             "verified" => '1',
-            "contactNumber" => $this->form->contactNumber
+            "contactNumber" => $this->form->contactNumber,
+            "createdByIdUser" => $user->idUser
         ]);
 
         App::getDB()->insert("userrole", [
