@@ -29,12 +29,12 @@ TODO
 06.12.22
 -managing products by admin pov.
 -filtering mechanism done.
+-manageProductsView.tpl change to searchView.tpl
+-SearchCtrl and FilteringCtrl introduction.
 
 TODO
 -Idk why i have to press two times button logout.
 -Main page with initial vinyl category selecting
 -something more that i do not know now.
--search bar could have border
--manageProductsView.tpl change to tamplate and use it in other places that need to
 -i think i spotted a bug in medoo 
 (difference in returning result between self builded querry and the same predefined querry)

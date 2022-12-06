@@ -154,6 +154,18 @@ class Utils {
 	    return "$idRole[0]";
     }
 
+    public static function getVinylsData(){
+        $user = unserialize($_SESSION['user']);
+        if(strcmp($user->role, "admin") == 0)
+        {
+            return App::getDB()->select("vinyl", "*");
+        }
+        else
+        {
+            return App::getDB()->select("vinyl", ['author', 'name', 'year', 'genre', 'idRental']);
+        }
+	}
+
     public static function getGenreList()
     {
         $genres = App::getDB()->select("vinyl", "genre");
@@ -176,6 +188,13 @@ class Utils {
         $uniqueYears = array_unique($years);
         sort($uniqueYears);
         return $uniqueYears;
+    }
+
+    public static function getDataForSearchBar($searchForm)
+    {
+        $searchForm->genresData = Utils::getGenreList();
+        $searchForm->authorsData = Utils::getAuthorList();
+        $searchForm->yearsData = Utils::getYearList();
     }
 
     public static function getVinylsDataFromQuery($searchForm)
@@ -207,12 +226,21 @@ class Utils {
                 $and .= " `year` = '$searchForm->selectedYear'";
             }
 
-            $query = 'SELECT * FROM `vinyl`'.$where.$and;
+            $user = unserialize($_SESSION['user']);
+            $query = null;
+            if(strcmp($user->role, "admin") == 0)
+            {
+                $query = 'SELECT * FROM `vinyl`'.$where.$and;
+            }
+            else
+            {
+                $query = 'SELECT `author`, `name`, `year`, `genre`, `idRental` FROM `vinyl`'.$where.$and;
+            }
             return App::getDB()->query($query)->fetchAll();
         }
         else
         {
-            return App::getDB()->select("vinyl", "*");
+            return Utils::getVinylsData();
         }
 
         // $sql = "SELECT * FROM `vinyl` WHERE `genre` = 'metal'";

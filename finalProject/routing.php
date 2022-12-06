@@ -12,6 +12,10 @@ Utils::addRoute('loginShow', 'LoginCtrl');
 Utils::addRoute('login', 'LoginCtrl');
 Utils::addRoute('logout', 'LoginCtrl', ['user', 'admin']);
 
+//searching and filtering
+Utils::addRoute('processFiltering', 'FilteringCtrl');
+Utils::addRoute('searchShow', 'SearchCtrl');
+
 //guest registration
 Utils::addRoute('registrationShow', 'RegistrationCtrl');
 Utils::addRoute('registration', 'RegistrationCtrl');
@@ -33,5 +37,4 @@ Utils::addRoute('manageProductsShow', 'ProductManagmentCtrl', ['admin']);
 Utils::addRoute('addVinylShow', 'ProductManagmentCtrl', ['admin']);
 Utils::addRoute('addVinyl', 'ProductManagmentCtrl', ['admin']);
 Utils::addRoute('deleteVinyl', 'ProductManagmentCtrl', ['admin']);
-Utils::addRoute('processFiltering', 'ProductManagmentCtrl', ['admin']);
 

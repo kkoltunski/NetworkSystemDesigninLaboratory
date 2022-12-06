@@ -2,7 +2,10 @@
 	<ul class="nav navbar-nav pull-right">    
         <li class="active"><a href="#">Top page</a></li>
         <li class="active"><a href="{$conf->action_url}homeShow">Home</a></li>
-        <li class="active"><a href="{$conf->action_url}resultsList">Search...</a></li>
+
+        {if !\core\RoleUtils::inRole('admin')}
+            <li class="active"><a href="{$conf->action_url}searchShow">Search...</a></li>
+        {/if}
 
         {if \core\RoleUtils::inRole('user') or \core\RoleUtils::inRole('admin')}
             {if \core\RoleUtils::inRole('admin')}

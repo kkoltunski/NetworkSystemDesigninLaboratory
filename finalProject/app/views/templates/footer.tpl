@@ -7,12 +7,16 @@
 					<p class="simplenav">
 						<a href="#">Top page</a> |
 						<b><a href="{$conf->action_url}homeShow">Home</a></b> |
-						<b><a href="{$conf->action_url}resultsList">Search...</a></b> |
+
+						{if !\core\RoleUtils::inRole('admin')}
+							<b><a href="{$conf->action_url}searchShow">Search...</a></b> |
+						{/if}
+
 						{if \core\RoleUtils::inRole('user') or \core\RoleUtils::inRole('admin')}
-						<b><a href="{$conf->action_url}logout">LOG OUT</a></b>
+							<b><a href="{$conf->action_url}logout">LOG OUT</a></b>
 						{else}
-						<b><a href="{$conf->action_url}registrationShow">Register</a></b> |
-						<b><a href="{$conf->action_url}loginShow">LOG IN</a></b>
+							<b><a href="{$conf->action_url}registrationShow">Register</a></b> |
+							<b><a href="{$conf->action_url}loginShow">LOG IN</a></b>
 						{/if}
 					</p>
 				</div>

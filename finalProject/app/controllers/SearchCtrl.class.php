@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use app\forms\VinylForm;
 use app\forms\SearchForm;
 
 use core\App;
@@ -10,7 +9,7 @@ use core\ParamUtils;
 use core\Utils;
 use core\Validator;
 
-class ProductManagmentCtrl 
+class SearchCtrl 
 {
     private $vinylsData;
     private $vinylForm;
@@ -18,51 +17,19 @@ class ProductManagmentCtrl
     private $idVinyl;
 
 	public function __construct(){
-        $this->vinylForm = new VinylForm();
         $this->searchForm = new SearchForm();
 	}
-	
-	public function action_manageProductsShow()
+
+	public function action_searchShow()
     {
         $this->vinylsData = Utils::getVinylsData();
-		$this->generateProductsManagementView();
+		$this->generateView();
 	}
 
-    public function action_addVinylShow()
-    {
-		$this->generateAddVinylView();
-	}
-
-    public function action_addVinyl()
-    {
-        $this->getParamsForNewVinyl();
-
-        if($this->validate())
-        {
-            $this->insertToDB();
-			Utils::addInfoMessage('Succesfully added.');
-		    $this->action_manageProductsShow();
-        }
-        else
-        {
-            $this->generateAddVinylView();
-        }
-	}
-
-    public function action_deleteVinyl()
-    {
-        $this->getParamsForDelete();
-
-        App::getDB()->delete("vinyl", ["idVinyl" => $this->idVinyl]);
-		Utils::addInfoMessage("Succesfully deleted idVinyl $this->idVinyl");
-
-		$this->action_manageProductsShow();
-	}
-
-    private function generateProductsManagementView(){
+    private function generateView(){
         Utils::getDataForSearchBar($this->searchForm);
 
-		App::getSmarty()->assign('page_title','Products management');
+		App::getSmarty()->assign('page_title','Search...');
         App::getSmarty()->assign('genresData',$this->searchForm->genresData);
         App::getSmarty()->assign('authorsData',$this->searchForm->authorsData);
         App::getSmarty()->assign('yearsData',$this->searchForm->yearsData);
