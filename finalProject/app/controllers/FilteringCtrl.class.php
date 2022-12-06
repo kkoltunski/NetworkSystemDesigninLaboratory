@@ -27,7 +27,7 @@ class FilteringCtrl
 
         if(strcmp($action, "reset") == 0)
         {
-            $this->vinylsShow();
+		    App::getRouter()->forwardTo("searchShow");
         }
         else
         {
@@ -35,21 +35,15 @@ class FilteringCtrl
         }
     }
 
-	public function vinylsShow()
-    {
-        $this->vinylsData = Utils::getVinylsData();
-		$this->generateProductsManagementView();
-	}
-
     public function filterVinylView()
     {
         ParamUtils::getParamsForFiltering($this->searchForm);
         $this->vinylsData = Utils::getVinylsDataFromQuery($this->searchForm);
 
-		$this->generateProductsManagementView();
+		$this->generateSearchView();
 	}
 
-    private function generateProductsManagementView(){
+    private function generateSearchView(){
         Utils::getDataForSearchBar($this->searchForm);
 
 		App::getSmarty()->assign('page_title','Vinyls overwiev');

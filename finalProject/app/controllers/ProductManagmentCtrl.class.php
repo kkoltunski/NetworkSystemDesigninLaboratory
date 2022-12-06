@@ -24,8 +24,9 @@ class ProductManagmentCtrl
 	
 	public function action_manageProductsShow()
     {
-        $this->vinylsData = Utils::getVinylsData();
-		$this->generateProductsManagementView();
+        // $this->vinylsData = Utils::getVinylsData();
+		// $this->generateSearchView();
+        App::getRouter()->forwardTo("searchShow");
 	}
 
     public function action_addVinylShow()
@@ -59,7 +60,7 @@ class ProductManagmentCtrl
 		$this->action_manageProductsShow();
 	}
 
-    private function generateProductsManagementView(){
+    private function generateSearchView(){
         Utils::getDataForSearchBar($this->searchForm);
 
 		App::getSmarty()->assign('page_title','Products management');

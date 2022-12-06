@@ -2,7 +2,7 @@
 
 {block name=content}
 
-<h3 class="thin text-center">Vinyls overwiev</h3>
+<h3 class="thin text-center">{$page_title}</h3>
 <hr>
 
 <form action="{$conf->action_url}processFiltering" method="post">
@@ -36,7 +36,7 @@
                 {foreach $data as $vinyl}
                     <div class="myTable-row">
                         {foreach $vinyl as $param}
-                            {if \core\RoleUtils::inRole('user') and (strcmp($param, $vinyl['idRental']) == 0)}
+                            {if !\core\RoleUtils::inRole('admin') and (((strcmp($param, $vinyl['idRental']) == 0) or (strcmp($param, $vinyl['idVinyl']) == 0)))}
                             {else}
                                 {if !empty($param)}
                                     <div class="myTable-data"><label>{$param}</label></div>
@@ -49,9 +49,9 @@
                         {if \core\RoleUtils::inRole('admin')}
                             {if !empty($vinyl['idRental'])}
                                 <div div class="myTable-data">
-                                    <form action="{$conf->action_url}returned" method="post">
+                                    <form action="{$conf->action_url}processReturned" method="post">
                                         <button class="btn btn-action" name="buttonValue" type="submit"
-                                            value={$vinyl['idRental']}>Returned</button>
+                                            value={$vinyl['idVinyl']}>Returned</button>
                                     </form>
                                 </div>
                             {else}
@@ -68,7 +68,7 @@
                                 <div div class="myTable-data">
                                     <form action="{$conf->action_url}processBooking" method="post">
                                         <button class="btn btn-action" name="buttonValue" type="submit"
-                                            value={$vinyl['idRental']}>Book</button>
+                                            value={$vinyl['idVinyl']}>Book</button>
                                     </form>
                                 </div>
                             {else}

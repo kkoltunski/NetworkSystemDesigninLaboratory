@@ -155,16 +155,24 @@ class Utils {
     }
 
     public static function getVinylsData(){
-        $user = unserialize($_SESSION['user']);
-        if(strcmp($user->role, "admin") == 0)
+        return App::getDB()->select("vinyl", "*");
+	}
+
+    public static function getVinylsDataForUserId($idUser)
+    {
+        $vinylsIds = App::getDB()->select("rental", "idVinyl_fk", [
+            "idUser_fk" => $idUser]);
+        
+        if(!empty($vinylsIds))
         {
-            return App::getDB()->select("vinyl", "*");
+            $vinylsData = App::getDB()->select("vinyl", "*", ["idVinyl" => $vinylsIds]);
+            return $vinylsData;
         }
         else
         {
-            return App::getDB()->select("vinyl", ['author', 'name', 'year', 'genre', 'idRental']);
+            return array();
         }
-	}
+    }
 
     public static function getGenreList()
     {
@@ -197,6 +205,41 @@ class Utils {
         $searchForm->yearsData = Utils::getYearList();
     }
 
+    public static function getGenreListForIds($idVinyls)
+    {
+        $genres = App::getDB()->select("vinyl", "genre", ["idVinyl" => $idVinyls]);
+        $uniqueGenres = array_unique($genres);
+        sort($uniqueGenres);
+        return $uniqueGenres;
+    }
+
+    public static function getAuthorListForIds($idVinyls)
+    {
+        $authors = App::getDB()->select("vinyl", "author", ["idVinyl" => $idVinyls]);
+        $uniqueAuthors = array_unique($authors);
+        sort($uniqueAuthors);
+        return $uniqueAuthors;
+    }
+
+    public static function getYearListForIds($idVinyls)
+    {
+        $years = App::getDB()->select("vinyl", "year", ["idVinyl" => $idVinyls]);
+        $uniqueYears = array_unique($years);
+        sort($uniqueYears);
+        return $uniqueYears;
+    }
+
+    public static function getDataForSearchBarReservations($searchForm)
+    {
+        $user = unserialize($_SESSION['user']);
+        $idVinyls = App::getDB()->select("rental", "idVinyl_fk", [
+            "idUser_fk" => $user->idUser]);
+
+        $searchForm->genresData = Utils::getGenreListForIds($idVinyls);
+        $searchForm->authorsData = Utils::getAuthorListForIds($idVinyls);
+        $searchForm->yearsData = Utils::getYearListForIds($idVinyls);
+    }
+
     public static function getVinylsDataFromQuery($searchForm)
     {
         $genreSelected = (strcmp($searchForm->selectedGenre, "0") !== 0);
@@ -226,16 +269,7 @@ class Utils {
                 $and .= " `year` = '$searchForm->selectedYear'";
             }
 
-            $user = unserialize($_SESSION['user']);
-            $query = null;
-            if(strcmp($user->role, "admin") == 0)
-            {
-                $query = 'SELECT * FROM `vinyl`'.$where.$and;
-            }
-            else
-            {
-                $query = 'SELECT `author`, `name`, `year`, `genre`, `idRental` FROM `vinyl`'.$where.$and;
-            }
+            $query = 'SELECT * FROM `vinyl`'.$where.$and;
             return App::getDB()->query($query)->fetchAll();
         }
         else
@@ -245,5 +279,57 @@ class Utils {
 
         // $sql = "SELECT * FROM `vinyl` WHERE `genre` = 'metal'";
         // return App::getDB()->query($query)->fetchAll();
+    }
+
+    public static function getVinylsDataFromQueryReservations($searchForm)
+    {
+        $genreSelected = (strcmp($searchForm->selectedGenre, "0") !== 0);
+        $authorSelected = (strcmp($searchForm->selectedAuthor, "0") !== 0);
+        $yearSelected = (strcmp($searchForm->selectedYear, "0") !== 0);
+
+        if($genreSelected or $authorSelected or $yearSelected)
+        {
+            $user = unserialize($_SESSION['user']);
+            $idVinyls = App::getDB()->select("rental", "idVinyl_fk", [
+                "idUser_fk" => $user->idUser]);
+
+            $where = " WHERE `idVinyl` = '$idVinyls'";
+            $and = '';
+
+            if($genreSelected){
+                $and .= " `genre` = '$searchForm->selectedGenre'";
+            }
+            if($authorSelected)
+            {
+                if(!empty($and)){
+                    $and .= " AND";
+                }
+                $and .= " `author` = '$searchForm->selectedAuthor'";
+            }
+            if($yearSelected)
+            {
+                if(!empty($and)){
+                    $and .= " AND";
+                }
+                $and .= " `year` = '$searchForm->selectedYear'";
+            }
+
+            // $query = null;
+            $query = 'SELECT * FROM `vinyl`'.$where.$and;
+            // if(strcmp($user->role, "admin") == 0)
+            // {
+            //     $query = 'SELECT * FROM `vinyl`'.$where.$and;
+            // }
+            // else
+            // {
+            //     // $query = 'SELECT `author`, `name`, `year`, `genre`, `idRental` FROM `vinyl`'.$where.$and;
+            //     $query = 'SELECT * FROM `vinyl`'.$where.$and;
+            // }
+            return App::getDB()->query($query)->fetchAll();
+        }
+        else
+        {
+            return Utils::getVinylsData();
+        }
     }
 }

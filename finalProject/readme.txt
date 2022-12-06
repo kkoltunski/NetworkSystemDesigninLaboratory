@@ -31,6 +31,7 @@ TODO
 -filtering mechanism done.
 -manageProductsView.tpl change to searchView.tpl
 -SearchCtrl and FilteringCtrl introduction.
+-reservations mechanism and view done
 
 TODO
 -Idk why i have to press two times button logout.
@@ -38,3 +39,5 @@ TODO
 -something more that i do not know now.
 -i think i spotted a bug in medoo 
 (difference in returning result between self builded querry and the same predefined querry)
+-for reservations filtering i have to filter out filterVinylView to get only those 
+vinyls that are on user rentals

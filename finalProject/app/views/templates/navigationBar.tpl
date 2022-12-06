@@ -12,7 +12,7 @@
                 <li class="active"><a href="{$conf->action_url}manageAccountsShow">Manage users</a></li>
                 <li class="active"><a href="{$conf->action_url}manageProductsShow">Manage products</a></li>
             {else}
-                <li class="active"><a href="{$conf->action_url}resultsList">Reservations</a></li>
+                <li class="active"><a href="{$conf->action_url}reservationsShow">Reservations</a></li>
                 <li class="active"><a href="{$conf->action_url}accountShow">Account settings</a></li>
 		    {/if}
 
