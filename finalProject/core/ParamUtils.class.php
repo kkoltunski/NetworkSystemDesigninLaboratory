@@ -44,4 +44,11 @@ class ParamUtils {
         return self::getFrom($_SESSION, $param_name, $required, $required_message, $index);
     }
 
+//user defined
+    public static function getParamsForFiltering($searchForm)
+    {
+        $searchForm->selectedGenre = ParamUtils::getFromRequest('genreSelect');
+        $searchForm->selectedAuthor = ParamUtils::getFromRequest('authorSelect');
+        $searchForm->selectedYear = ParamUtils::getFromRequest('yearSelect');
+    }
 }

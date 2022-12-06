@@ -72,6 +72,7 @@ class AccountManagmentCtrl
         $this->getParamsForModification();
 
         App::getDB()->delete("user", ["idUser" => $this->idUser]);
+		Utils::addInfoMessage("Succesfully deleted idUser $this->idUser");
 
 		$this->action_manageAccountsShow();
 	}
@@ -123,12 +124,15 @@ class AccountManagmentCtrl
             ]
         );
 
-		$this->data = App::getDB()->select("user", 
+        if(!empty($ids))
+        {
+            $this->data = App::getDB()->select("user", 
             ['idUser', 'username', 'password', 'email', 'verified', 'contactNumber'], 
             [
                 'idUser' => $ids
             ]
         );
+        }
 	}
 
     private function getParamsForModification()
@@ -149,7 +153,7 @@ class AccountManagmentCtrl
 		App::getSmarty()->assign('page_title','Accounts management');
         App::getSmarty()->assign('data',$this->data);
 
-		App::getSmarty()->display('manageAccounts.tpl');
+		App::getSmarty()->display('manageAccountsView.tpl');
 	}
 
     private function generateAddUserView(){

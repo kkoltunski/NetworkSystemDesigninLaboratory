@@ -132,6 +132,19 @@ class Utils {
         return $contactNumberValidator->isLastOK();
     }
 
+    public static function isPhraseValid($phrase, $type, $maxLength)
+    {
+        $phraseValidator = new Validator();
+        $p = $phraseValidator->validate($phrase, [
+            'required' => true,
+            'required_message' => "$type is required.",
+            'max_length' => $maxLength,
+            'validator_message' => "$type should have up to $maxLength characters."
+        ]);
+
+        return $phraseValidator->isLastOK();
+    }
+
     public static function getIdRole($name)
     {
 	    $idRole = App::getDB()->select("role", "idRole", [
@@ -139,5 +152,70 @@ class Utils {
 	    ]);
 
 	    return "$idRole[0]";
+    }
+
+    public static function getGenreList()
+    {
+        $genres = App::getDB()->select("vinyl", "genre");
+        $uniqueGenres = array_unique($genres);
+        sort($uniqueGenres);
+        return $uniqueGenres;
+    }
+
+    public static function getAuthorList()
+    {
+        $authors = App::getDB()->select("vinyl", "author");
+        $uniqueAuthors = array_unique($authors);
+        sort($uniqueAuthors);
+        return $uniqueAuthors;
+    }
+
+    public static function getYearList()
+    {
+        $years = App::getDB()->select("vinyl", "year");
+        $uniqueYears = array_unique($years);
+        sort($uniqueYears);
+        return $uniqueYears;
+    }
+
+    public static function getVinylsDataFromQuery($searchForm)
+    {
+        $genreSelected = (strcmp($searchForm->selectedGenre, "0") !== 0);
+        $authorSelected = (strcmp($searchForm->selectedAuthor, "0") !== 0);
+        $yearSelected = (strcmp($searchForm->selectedYear, "0") !== 0);
+
+        if($genreSelected or $authorSelected or $yearSelected)
+        {
+            $where = ' WHERE';
+            $and = '';
+
+            if($genreSelected){
+                $and .= " `genre` = '$searchForm->selectedGenre'";
+            }
+            if($authorSelected)
+            {
+                if(!empty($and)){
+                    $and .= " AND";
+                }
+                $and .= " `author` = '$searchForm->selectedAuthor'";
+            }
+            if($yearSelected)
+            {
+                if(!empty($and)){
+                    $and .= " AND";
+                }
+                $and .= " `year` = '$searchForm->selectedYear'";
+            }
+
+            $query = 'SELECT * FROM `vinyl`'.$where.$and;
+            return App::getDB()->query($query)->fetchAll();
+        }
+        else
+        {
+            return App::getDB()->select("vinyl", "*");
+        }
+
+        // $sql = "SELECT * FROM `vinyl` WHERE `genre` = 'metal'";
+        // return App::getDB()->query($query)->fetchAll();
     }
 }
