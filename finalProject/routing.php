@@ -7,6 +7,7 @@ App::getRouter()->setDefaultRoute('homeShow');
 App::getRouter()->setLoginRoute('loginShow');
 
 Utils::addRoute('homeShow', 'HomeCtrl');
+Utils::addRoute('searchFromHome', 'HomeCtrl');
 
 //logging managment
 Utils::addRoute('loginShow', 'LoginCtrl');

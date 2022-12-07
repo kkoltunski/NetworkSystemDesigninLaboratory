@@ -283,4 +283,10 @@ class Utils {
         // $sql = "SELECT * FROM `vinyl` WHERE `genre` = 'metal'";
         // return App::getDB()->query($query)->fetchAll();
     }
+    
+    public static function getVinylsDataFromQueryForTable($table, $phrase)
+    {
+        $query = "SELECT * FROM `vinyl` WHERE `$table` = '$phrase'";
+        return App::getDB()->query($query)->fetchAll();
+    }
 }

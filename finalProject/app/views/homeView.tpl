@@ -2,14 +2,54 @@
 
 {block name=content}
 
-<div class="pure-g">
-	<div class="l-box-lrg pure-u-1 pure-u-med-2-5">
-		<form class="pure-form pure-form-stacked" action="{$conf->action_root}calcCompute" method="post">
+<div class="panel-body">
+	<form action="{$conf->action_url}searchFromHome" method="post">
+		<h3 class="thin text-center">Genres</h3>
+		<hr>
+		<div class="menu-container">
+    		<div class="button-container">
+				{if !empty($genresData)}
+            		{foreach $genresData as $genre}
+        				<div class="action-container">
+            				<button class="btn btn-action" style="float: left" type="submit" name="buttonValue" value="0.{$genre}">{$genre}</button>
+        				</div>
+            		{/foreach}
+        		{/if}		
+    		</div>
+		</div>
+		<hr>
 
-		{include file='searchBar.tpl'}
+		<h3 class="thin text-center">Authors</h3>
+		<hr>
+		<div class="menu-container">
+    		<div class="button-container">
+				{if !empty($authorsData)}
+            		{foreach $authorsData as $author}
+        				<div class="action-container">
+            				<button class="btn btn-action" style="float: left" type="submit" name="buttonValue" value="1.{$author}">{$author}</button>
+        				</div>
+            		{/foreach}
+        		{/if}		
+    		</div>
+		</div>
+		<hr>
 
-		</form>
-	</div>
+		<h3 class="thin text-center">Years</h3>
+		<hr>
+		<div class="menu-container">
+    		<div class="button-container">
+				{if !empty($yearsData)}
+            		{foreach $yearsData as $year}
+        				<div class="action-container">
+            				<button class="btn btn-action" style="float: left" type="submit" name="buttonValue" value="2.{$year}">{$year}</button>
+        				</div>
+            		{/foreach}
+        		{/if}		
+    		</div>
+		</div>
+		<hr>
+	</form>
 </div>
+
 
 {/block}
