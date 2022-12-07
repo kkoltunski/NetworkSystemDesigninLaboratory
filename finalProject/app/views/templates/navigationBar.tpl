@@ -1,14 +1,17 @@
+{assign var=inRoleAdmin value=\core\RoleUtils::inRole('admin') nocache}
+{assign var=inRoleUser value=\core\RoleUtils::inRole('user') nocache}
+
 <div class="navbar-collapse collapse">
 	<ul class="nav navbar-nav pull-right">    
         <li class="active"><a href="#">Top page</a></li>
         <li class="active"><a href="{$conf->action_url}homeShow">Home</a></li>
 
-        {if !\core\RoleUtils::inRole('admin')}
+        {if !$inRoleAdmin}
             <li class="active"><a href="{$conf->action_url}searchShow">Search...</a></li>
         {/if}
 
-        {if \core\RoleUtils::inRole('user') or \core\RoleUtils::inRole('admin')}
-            {if \core\RoleUtils::inRole('admin')}
+        {if $inRoleUser or $inRoleAdmin}
+            {if $inRoleAdmin}
                 <li class="active"><a href="{$conf->action_url}manageAccountsShow">Manage users</a></li>
                 <li class="active"><a href="{$conf->action_url}manageProductsShow">Manage products</a></li>
             {else}

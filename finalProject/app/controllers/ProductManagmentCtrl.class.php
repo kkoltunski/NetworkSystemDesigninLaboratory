@@ -24,8 +24,6 @@ class ProductManagmentCtrl
 	
 	public function action_manageProductsShow()
     {
-        // $this->vinylsData = Utils::getVinylsData();
-		// $this->generateSearchView();
         App::getRouter()->forwardTo("searchShow");
 	}
 
@@ -58,18 +56,6 @@ class ProductManagmentCtrl
 		Utils::addInfoMessage("Succesfully deleted idVinyl $this->idVinyl");
 
 		$this->action_manageProductsShow();
-	}
-
-    private function generateSearchView(){
-        Utils::getDataForSearchBar($this->searchForm);
-
-		App::getSmarty()->assign('page_title','Products management');
-        App::getSmarty()->assign('genresData',$this->searchForm->genresData);
-        App::getSmarty()->assign('authorsData',$this->searchForm->authorsData);
-        App::getSmarty()->assign('yearsData',$this->searchForm->yearsData);
-        App::getSmarty()->assign('data',$this->vinylsData);
-
-		App::getSmarty()->display('searchView.tpl');
 	}
 
     private function generateAddVinylView(){

@@ -49,8 +49,10 @@ class AccountManagmentCtrl
     {
         $this->getParamsForModification();
 
+        $user = unserialize($_SESSION['user']);
         App::getDB()->update("user", [
             "password" => 'xxxxxx',
+            "modifiedByIdUser" => $user->idUser,
         ], ["idUser" => $this->idUser]);
 
 		$this->action_manageAccountsShow();
@@ -60,8 +62,10 @@ class AccountManagmentCtrl
     {
         $this->getParamsForModification();
 
+        $user = unserialize($_SESSION['user']);
         App::getDB()->update("user", [
             "verified" => '1',
+            "modifiedByIdUser" => $user->idUser,
         ], ["idUser" => $this->idUser]);
 
 		$this->action_manageAccountsShow();
@@ -71,8 +75,19 @@ class AccountManagmentCtrl
     {
         $this->getParamsForModification();
 
-        App::getDB()->delete("user", ["idUser" => $this->idUser]);
-		Utils::addInfoMessage("Succesfully deleted idUser $this->idUser");
+        $rentalsId = App::getDB()->select("rental", "idRental", [
+            "idUser_fk" => $this->idUser]);
+        
+        if(empty($rentalsId))
+        {
+            App::getDB()->delete("user", ["idUser" => $this->idUser]);
+            Utils::addInfoMessage("Succesfully deleted idUser $this->idUser");
+        }
+        else
+        {
+            Utils::addErrorMessage("Can not delete. idUser $this->idUser has active orders.");
+        }
+
 
 		$this->action_manageAccountsShow();
 	}

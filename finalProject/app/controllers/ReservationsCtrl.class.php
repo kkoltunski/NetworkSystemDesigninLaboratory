@@ -103,8 +103,26 @@ class ReservationsCtrl
     public function filterVinylView()
     {
         ParamUtils::getParamsForFiltering($this->searchForm);
-        // $this->vinylsData = Utils::getVinylsDataFromQueryReservations($this->searchForm);
+        Utils::getDataForSearchBarReservations($this->searchForm);
         $this->vinylsData = Utils::getVinylsDataFromQuery($this->searchForm);
+
+        if(!empty($this->vinylsData))
+        {
+            $user = unserialize($_SESSION['user']);
+            $idsUser = App::getDB()->select("rental", "idRental", [
+                "idUser_fk" => $user->idUser]);
+            $filteredArray = array();
+
+            foreach($this->vinylsData as $vinyl)
+            {
+                if(in_array($vinyl["idRental"], $idsUser))
+                {
+                    array_push($filteredArray, $vinyl);
+                }
+            }
+
+            $this->vinylsData = $filteredArray;
+        }
 
 		$this->generateSearchView();
 	}

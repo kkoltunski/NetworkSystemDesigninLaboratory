@@ -235,9 +235,12 @@ class Utils {
         $idVinyls = App::getDB()->select("rental", "idVinyl_fk", [
             "idUser_fk" => $user->idUser]);
 
-        $searchForm->genresData = Utils::getGenreListForIds($idVinyls);
-        $searchForm->authorsData = Utils::getAuthorListForIds($idVinyls);
-        $searchForm->yearsData = Utils::getYearListForIds($idVinyls);
+        if(!empty($idVinyls))
+        {
+            $searchForm->genresData = Utils::getGenreListForIds($idVinyls);
+            $searchForm->authorsData = Utils::getAuthorListForIds($idVinyls);
+            $searchForm->yearsData = Utils::getYearListForIds($idVinyls);
+        }
     }
 
     public static function getVinylsDataFromQuery($searchForm)
@@ -279,57 +282,5 @@ class Utils {
 
         // $sql = "SELECT * FROM `vinyl` WHERE `genre` = 'metal'";
         // return App::getDB()->query($query)->fetchAll();
-    }
-
-    public static function getVinylsDataFromQueryReservations($searchForm)
-    {
-        $genreSelected = (strcmp($searchForm->selectedGenre, "0") !== 0);
-        $authorSelected = (strcmp($searchForm->selectedAuthor, "0") !== 0);
-        $yearSelected = (strcmp($searchForm->selectedYear, "0") !== 0);
-
-        if($genreSelected or $authorSelected or $yearSelected)
-        {
-            $user = unserialize($_SESSION['user']);
-            $idVinyls = App::getDB()->select("rental", "idVinyl_fk", [
-                "idUser_fk" => $user->idUser]);
-
-            $where = " WHERE `idVinyl` = '$idVinyls'";
-            $and = '';
-
-            if($genreSelected){
-                $and .= " `genre` = '$searchForm->selectedGenre'";
-            }
-            if($authorSelected)
-            {
-                if(!empty($and)){
-                    $and .= " AND";
-                }
-                $and .= " `author` = '$searchForm->selectedAuthor'";
-            }
-            if($yearSelected)
-            {
-                if(!empty($and)){
-                    $and .= " AND";
-                }
-                $and .= " `year` = '$searchForm->selectedYear'";
-            }
-
-            // $query = null;
-            $query = 'SELECT * FROM `vinyl`'.$where.$and;
-            // if(strcmp($user->role, "admin") == 0)
-            // {
-            //     $query = 'SELECT * FROM `vinyl`'.$where.$and;
-            // }
-            // else
-            // {
-            //     // $query = 'SELECT `author`, `name`, `year`, `genre`, `idRental` FROM `vinyl`'.$where.$and;
-            //     $query = 'SELECT * FROM `vinyl`'.$where.$and;
-            // }
-            return App::getDB()->query($query)->fetchAll();
-        }
-        else
-        {
-            return Utils::getVinylsData();
-        }
     }
 }

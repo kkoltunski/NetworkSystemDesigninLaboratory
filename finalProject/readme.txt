@@ -39,5 +39,14 @@ TODO
 -something more that i do not know now.
 -i think i spotted a bug in medoo 
 (difference in returning result between self builded querry and the same predefined querry)
--for reservations filtering i have to filter out filterVinylView to get only those 
-vinyls that are on user rentals
+
+07.12.22
+-filteres out vinyls result for reservations
+-delete user protection ina case that rental is assigned to introduction
+
+TODO
+-Idk why i have to press two times button logout.
+-Main page with initial vinyl category selecting
+-something more that i do not know now.
+-i think i spotted a bug in medoo 
+(difference in returning result between self builded querry and the same predefined querry)
