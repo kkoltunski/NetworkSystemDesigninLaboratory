@@ -17,6 +17,7 @@ Utils::addRoute('logout', 'LoginCtrl', ['user', 'admin']);
 // searching and filtering
 Utils::addRoute('processFiltering', 'FilteringCtrl');
 Utils::addRoute('searchShow', 'SearchCtrl');
+Utils::addRoute('selectPage', 'SearchCtrl');
 
 // guest registration
 Utils::addRoute('registrationShow', 'RegistrationCtrl');

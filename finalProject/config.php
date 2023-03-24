@@ -4,8 +4,8 @@ $conf->debug = true; # set true during development and use in your code (for ins
 # ---- Webapp location
 $conf->server_name = 'localhost';   # server address and port
 $conf->protocol = 'http';           # http or https
-$conf->app_root = '/NetworkApplicationsLaboratory/finalProject/public';   # project subfolder in domain (relative to main domain)
-$conf->projectDir = '/NetworkApplicationsLaboratory/finalProject/';
+$conf->app_root = '/NetworkSystemDesigninLaboratory/finalProject/public';   # project subfolder in domain (relative to main domain)
+$conf->projectDir = '/NetworkSystemDesigninLaboratory/finalProject/';
 
 # ---- Database config - values required by Medoo
 $conf->db_type = 'mysql';

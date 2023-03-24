@@ -154,8 +154,12 @@ class Utils {
 	    return "$idRole[0]";
     }
 
-    public static function getVinylsData(){
+    public static function getWholeVinylsData(){
         return App::getDB()->select("vinyl", "*");
+	}
+
+    public static function getVinylsData($from, $to){
+        return App::getDB()->select("vinyl", "*", ['LIMIT' => [$from, $to]]);
 	}
 
     public static function getVinylsDataForUserId($idUser)
