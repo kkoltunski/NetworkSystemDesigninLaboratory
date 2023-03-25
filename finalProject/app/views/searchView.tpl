@@ -77,52 +77,6 @@
                         {/if}
                     </div>
                 {/foreach}
-
-                <!--{for $index = ($pagination->currentPage * $pagination->recordsCountOnPage) to ($index + ($pagination->recordsCountOnPage - 1))}
-                    <div class="myTable-row">
-                        {assign var=vinyl value=$data[$index]}
-                        {foreach $vinyl as $param}
-                            {if !\core\RoleUtils::inRole('admin') and (((strcmp($param, $vinyl['idRental']) == 0) or (strcmp($param, $vinyl['idVinyl']) == 0)))}
-                            {else}
-                                {if !empty($param)}
-                                    <div class="myTable-data"><label>{$param}</label></div>
-                                {else}
-                                    <div class="myTable-data"><label>-</label></div>
-                                {/if}
-                            {/if}
-                        {/foreach}
-
-                        {if \core\RoleUtils::inRole('admin')}
-                            {if !empty($vinyl['idRental'])}
-                                <div div class="myTable-data">
-                                    <form action="{$conf->action_url}processReturned" method="post">
-                                        <button class="btn btn-action" name="buttonValue" type="submit"
-                                            value={$vinyl['idVinyl']}>Returned</button>
-                                    </form>
-                                </div>
-                            {else}
-                                <div div class="myTable-data">
-                                    <form action="{$conf->action_url}deleteVinyl" method="post">
-                                        <button class="btn btn-action" name="buttonValue" type="submit"
-                                            value={$vinyl['idVinyl']}>Delete</button>
-                                    </form>
-                                </div>
-                            {/if}
-                        {/if}
-                        {if \core\RoleUtils::inRole('user')}
-                            {if empty($vinyl['idRental'])}
-                                <div div class="myTable-data">
-                                    <form action="{$conf->action_url}processBooking" method="post">
-                                        <button class="btn btn-action" name="buttonValue" type="submit"
-                                            value={$vinyl['idVinyl']}>Book</button>
-                                    </form>
-                                </div>
-                            {else}
-                                <div class="myTable-data"><label>Already booked.</label></div>
-                            {/if}
-                        {/if}
-                    </div>
-                {/for}-->
             {else}
                 <div class="myTable-data" style="padding: 10px"><label>No data to display.</label></div>
             {/if}
@@ -130,9 +84,7 @@
     </div>
 </div>
 
-<form action="{$conf->action_url}xxx" method="post">
-    {include file='pagination.tpl'}
-</form>	
+{include file='pagination.tpl'}
 
 <hr>
 
