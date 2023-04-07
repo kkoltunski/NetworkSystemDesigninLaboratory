@@ -246,3 +246,39 @@
 	-moz-border-radius: 3px;
 	border-radius: 3px;
 }
+
+/*******************************/
+/*         Pagination          */
+/*******************************/
+
+.center {
+	text-align: center;
+}
+
+.pagination {
+	display: inline-block;
+}
+
+.pagination a {
+	color: #FFEFD7;
+	float: left;
+	padding: 8px 16px;
+	margin-left: 10px;
+	text-decoration: none;
+	background-color: rgb(185, 130, 67);
+	border: 1px solid rgb(185, 130, 67);
+	border-radius: 5px;
+}
+
+.pagination a.active {
+	background-color: rgb(187, 158, 125);
+	color: #FFEFD7;
+	border: 1px solid rgb(187, 158, 125);
+	border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+	background-color: rgb(187, 158, 125);
+	border: 1px solid rgb(187, 158, 125);
+	border-radius: 5px;
+}

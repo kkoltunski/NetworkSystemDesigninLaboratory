@@ -15,6 +15,7 @@
 	<!-- Custom styles for our template -->
 	<link rel="stylesheet" href="{$conf->projectDir}/assets/css/bootstrap-theme.css" media="screen">
 	<link rel="stylesheet" href="{$conf->projectDir}/assets/css/main.css">
+	<script type="text/javascript" src="{$conf->projectDir}/assets/js/functions.js"></script>
 </head>
 
 <body class="home">
